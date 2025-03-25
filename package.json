@@ -6,12 +6,32 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cy:open": "cypress open",
+    "test": "cypress run --component --env codeCoverage=true",
+    "coverage": "nyc npm run test",
+    "see-cy-coverage": "open ./cypress-coverage/index.html",
+    "pre-e2e": "rm -rf .nyc_output coverage .next || true",
+    "e2e": "npm run pre-e2e && cypress run --component"
+  },
+  "nyc": {
+    "extends": ".nycrc.json",
+    "report-dir": "cypress-coverage",
+    "reporter": [
+      "json",
+      "lcov",
+      "text-summary"
+    ]
   },
   "dependencies": {
+    "@ant-design/icons": "^5.6.1",
+    "@ant-design/nextjs-registry": "^1.0.2",
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
+    "@hookform/resolvers": "^4.1.2",
     "@types/node": "^22.5.1",
     "@types/react": "19.0.7",
     "@types/react-dom": "19.0.3",
+    "antd": "^5.24.2",
     "autoprefixer": "^10.4.19",
     "crypto-js": "^4.2.0",
     "eslint": "8.57.0",
@@ -23,13 +43,18 @@
     "postcss": "^8.4.38",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-hook-form": "^7.51.3",
+    "react-hook-form": "^7.54.2",
     "tailwindcss": "^3.4.3",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.13.12",
     "@tailwindcss/forms": "^0.5.7",
-    "@types/crypto-js": "^4.2.2"
+    "@types/crypto-js": "^4.2.2",
+    "babel-plugin-istanbul": "^7.0.0",
+    "cypress": "^14.2.0",
+    "nyc": "^17.1.0"
   },
   "overrides": {
     "@types/react": "19.0.7",
